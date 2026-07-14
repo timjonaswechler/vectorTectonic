@@ -1,25 +1,39 @@
-# PROTOTYP — Bootstrap zur vollständigen Plattenabdeckung
+# PROTOTYP — visueller Bootstrap zur vollständigen Plattenabdeckung
 
-**Frage:** Fühlt sich der minimale Zustandsablauf vom Seed mit einem Superkontinent, zehn unteilbaren Kratonen und 75 % nicht aufgelöster alter Ozeankruste über Rift, atomaren Break-up, Rücken und konsumierenden Graben bis zu 100 % expliziter Plattenabdeckung stimmig an?
+**Frage:** Wirkt der räumliche Ablauf vom driftenden Superkontinent mit zehn unteilbaren Kratonen über Rift und atomaren Break-up bis zur vollständigen expliziten Plattenabdeckung nachvollziehbar?
 
-Dieser wegwerfbare Logik-Prototyp prüft nur die Reihenfolge und die sichtbaren Zustandsinvarianten. Er implementiert **keine** sphärische Geometrie, Kinematik, Kandidatenbewertung, Flussintegration oder Produktionsarchitektur. Die 5-%-Flächenschritte sind absichtlich normalisierte Ablaufmarker und keine wissenschaftliche Rate. Weil das Planungsrepository noch keinen Projektruntime oder Task-Runner besitzt, verwendet der Prototyp ausschließlich Python 3 aus der Standardbibliothek.
+Dieser wegwerfbare Rust-/Bevy-Prototyp zeigt bewusst ein **deterministisch geskriptetes Anschauungsszenario**. Er prüft Formen, Drift, sichtbare Phasenübergänge und Flächenbilanz – nicht die spätere sphärische Geometrie-Engine, Ereignisauswahl oder physikalische Kalibrierung. Die Polygonformen und Geschwindigkeiten sind illustrative Platzhalter.
 
 ## Start
 
+Rust 1.89 oder neuer wird benötigt.
+
 ```bash
-python3 prototypes/bootstrap_plate_coverage/run.py
+cd prototypes/bootstrap_plate_coverage && cargo run --release
 ```
 
-Am günstigsten lässt sich der vorgesehene Pfad mit wiederholtem `n` durchspielen. Mit `x` wird sichtbar, dass ein Kratonschnitt abgelehnt wird. Der Bildschirm zeigt nach jeder Aktion den vollständigen relevanten Zustand und alle fünf geprüften Invarianten.
+Der erste Build lädt und kompiliert Bevy. Danach startet der Ablauf automatisch.
 
-## Erwarteter Ablauf zur Diskussion
+## Bedienung
 
-1. Am konvergenten Seed-Rand qualifiziert alter Ozean als unbewegte Unterseite für Subduktion.
-2. Ein Rift folgt einer nichtkratonischen Schwäche und lässt alle zehn Kratone ganz.
-3. Nach 35 aktiven Myr endet die Seed-Platte atomar; zwei Nachfolgerplatten und ein aktiver Rücken entstehen, aber noch keine Ozeanfläche im Break-up-Moment.
-4. Erst mit aktivem Rücken **und** aktivem konsumierendem Graben wird Hintergrundfläche schrittweise durch aufgelöste ozeanische Kruste auf expliziten Platten ersetzt.
-5. Bei Hintergrundfläche null wechselt die Phase einmalig zur Reife; der Prototyp stoppt dort bewusst.
+- `Leertaste`: Pause/Fortsetzen
+- `←` / `→`: in 5-Myr-Schritten prüfen
+- `R`: Neustart
+- linke Maustaste ziehen: Globus drehen
+
+## Sichtbarer Ablauf
+
+1. **0–5 Myr:** Ein Superkontinent mit zehn hell markierten, unteilbaren Kratonen driftet gegen den unbewegten alten Ozeanhintergrund; ein Graben ist rot markiert.
+2. **5–17,5 Myr:** Ein gelbes Rift folgt nichtkratonischer Kruste.
+3. **17,5–35 Myr:** Das Rift lokalisiert sich, aber beide Kontinenthälften bewegen sich weiterhin als eine starre Seed-Platte.
+4. **Bei 35 Myr:** Atomarer Break-up; erst jetzt entstehen zwei Platten und ein cyanfarbener Rücken. Im Break-up-Moment entsteht noch keine Ozeanfläche.
+5. **35–110 Myr:** Die Platten driften auseinander. Polygonale Ozeanflächen wechseln vom alten grauen Hintergrund zu bekannten blauen Plattengebieten.
+6. **Bei 110 Myr:** Hintergrundfläche ist null; die Initialisierung endet. Die Reifephase wird bewusst nicht prototypisiert.
+
+## Nicht enthalten
+
+Keine frei veränderbaren Parameter, keine Produktionsdatenstrukturen, keine robuste sphärische Überlagerung und keine vollständige Ereignislogik. Solche Interaktion gehört nur dann in einen weiteren Prototyp, wenn nach dieser Sichtprüfung noch eine konkrete Designfrage offen bleibt; andernfalls in die spätere MVP-Implementierung.
 
 ## Wegwerfhinweis
 
-Nach gemeinsamer Beantwortung der Frage wird nur die bestätigte Entscheidung in der Spezifikation bewahrt; dieser TUI-Prototyp soll anschließend gelöscht oder ersetzt werden.
+Nach gemeinsamer Beantwortung der Frage wird nur die bestätigte Entscheidung in der Spezifikation bewahrt. Dieser Prototyp soll anschließend gelöscht oder ersetzt werden.
