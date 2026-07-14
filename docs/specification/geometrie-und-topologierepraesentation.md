@@ -109,6 +109,8 @@ Tektonische Features bleiben separate überlagernde Punkt-, Linien- oder Fläche
 
 Feature-Geometrien verwenden dieselben normalisierten Punkte, geodätischen Bögen, robusten Prädikate, dieselbe `SnapPolicy` und dieselben ausdrücklich benannten Randmodelle. Bei einer Transaktion werden betroffene Feature-Layer gemeinsam mit der Besitzanordnung gesnappt und an deren Grenzen segmentiert. Dadurch sind Feature-Bindungen ohne toleranzbasierte Näherung prüfbar.
 
+Ein grenzgebundenes Linienfeature muss mit seiner bezeichneten aktuellen Plattengebietsgrenze deckungsgleich sein. Ein grenzgebundenes Flächenfeature besitzt stattdessen eine gemeinsam gesnappte linienförmige Bindungsachse auf dieser Grenze; sein autoritatives Polygon darf angrenzende Faces überlagern und muss vollständig und deterministisch aus Bindungsachse und fachlichen Parametern reproduzierbar sein. Die Bindungsachse ist keine zweite Feature-Geometrie und keine Kante der Besitzpartition. Im MVP verwendet ausschließlich eine aktive oder abklingende Orogenzone diese Bindungsform.
+
 Erst wenn eine Ereigniskurve die Besitzpartition tatsächlich verändert, etwa beim erfolgreichen Aufbrechen durch ein Rift, wird sie ausdrücklich als Kante in die gemeinsame Anordnung eingefügt. Eine Linien-Mengendifferenz allein teilt keine Face.
 
 ## 6. Opaker SurfaceSnapshot
@@ -228,7 +230,7 @@ Eine Transaktion darf nur committen, wenn der vollständige Ergebnis-Snapshot mi
 ### Features und Herkunft
 
 1. Jedes aktuelle Feature besitzt eine gültige, gemeinsam gesnappte räumliche Bindung.
-2. Grenzgebundene Features liegen auf den bezeichneten aktuellen Plattengebietsgrenzen; krustengebundene Features liegen auf oder in den bezeichneten tragenden Krustenregionen.
+2. Grenzgebundene Linienfeatures liegen auf den bezeichneten aktuellen Plattengebietsgrenzen; bei grenzgebundenen Flächenfeatures liegt ihre Bindungsachse dort und ihre Geometrie ist vollständig aus Achse und fachlichen Parametern reproduzierbar. Krustengebundene Features liegen auf oder in den bezeichneten tragenden Krustenregionen.
 3. Technische Provenienz ist vollständig und von fachlicher Abstammung getrennt.
 4. Fachliche Identitäten, Fortbestands- und Nachfolgerpläne erfüllen die Invarianten des Zustandsmodells.
 

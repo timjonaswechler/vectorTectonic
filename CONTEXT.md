@@ -128,13 +128,29 @@ _Avoid_: unvollständige Feature-Map, erfolgreicher Lauf mit Warnung
 Eine identifizierbare, fachlich klassifizierte Punkt-, Linien- oder Flächenerscheinung mit benannten Beziehungen zu beteiligten Plattengebieten und Krustenregionen. Zustands- und Geometrieänderungen erhalten ihre Identität; Features dürfen sich überlagern und bilden keine exklusive Flächenpartition.
 _Avoid_: Plattengebietsgrenze, Eigentum genau einer Platte, exklusive Flächenklasse, Pixel, Höhenwert
 
+**Feature-Lebenszyklus**:
+Die zusammenhängende Aktivitäts- und Erhaltungsperiode genau einer Feature-Identität in den Zuständen aktiv, abklingend oder reliktisch. Ereigniskandidaten sind noch keine Features; Typwechsel, Reaktivierung eines Relikts sowie fachliche Teilung oder Vereinigung erzeugen Nachfolgeridentitäten.
+_Avoid_: wiederholte Aktivitätsperioden derselben Identität, technischer Geometrieverlauf, vollständige Simulationshistorie
+
+**Aktives Feature**:
+Ein aktuelles Feature, dessen tektonischer Prozess oder, bei einer Fracture Zone, dessen Spurbildung läuft.
+_Avoid_: Ereigniskandidat, Feature während der Hysterese, Relikt
+
+**Abklingendes Feature**:
+Ein aktuelles Feature, dessen Aktivitätsbedingung nicht mehr erfüllt ist, dessen bestätigte Hysterese oder Ausklangfrist aber noch läuft. Prozesswirkungen pausieren; eine rechtzeitige Erholung erhält die Identität.
+_Avoid_: weiterhin verdeckt aktives Feature, Relikt, beendete Identität
+
+**Reliktisches Feature**:
+Ein aktuelles, erhaltenes Feature nach Ende seines erzeugenden Prozesses. Seine Identität kann nicht wieder aktiv werden; spätere Reaktivierung erzeugt ein neues Feature mit Vorgängerbeziehung.
+_Avoid_: inaktiver Ereigniskandidat, gelöschte Geometrie, erneut aktive gleiche Identität
+
 **Feature-Beziehung**:
 Die benannte Rolle einer Platte, eines Plattengebiets oder einer Krustenregion an einem tektonischen Feature, etwa Oberseite, Unterseite, angrenzende Seite oder aktueller Träger eines Relikts.
 _Avoid_: ungerichtete Beteiligung, Eigentümerplatte
 
 **Feature-Bindung**:
-Die räumliche Verankerung eines aktuellen tektonischen Features entweder auf einer aktuellen Plattengebietsgrenze oder auf beziehungsweise innerhalb aktuell tragender Krustenregionen. Vollständiger Verbrauch der tragenden Kruste beendet ein krustengebundenes Feature; räumliche Trennung erzeugt eigenständige Nachfolger.
-_Avoid_: bloße historische Beteiligung, schwebendes Feature
+Die räumliche Verankerung eines aktuellen tektonischen Features an einer aktuellen Plattengebietsgrenze oder auf beziehungsweise innerhalb aktuell tragender Krustenregionen. Grenzgebundene Flächenfeatures verwenden eine Bindungsachse auf der Grenze; vollständiger Trägerverbrauch beziehungsweise räumliche Trennung krustengebundener Geometrie beendet sie oder erzeugt Nachfolger.
+_Avoid_: bloße historische Beteiligung, Eigentümerplatte eines grenzgebundenen Features, schwebendes Feature
 
 **Feature-Abstammung**:
 Die azyklische Herkunft eines tektonischen Features aus Typwechsel, Teilung oder Vereinigung anderer Features. Sie darf mehrere Vorgänger oder Nachfolger besitzen; bloße Zustands- und Geometrieänderungen führen dieselbe Identität fort.
@@ -149,16 +165,48 @@ Eine noch nicht eingetretene Möglichkeit für ein tektonisches Ereignis. Er geh
 _Avoid_: tektonisches Feature, Relikt
 
 **Reliktsutur**:
-Eine im Seed-Zustand erzeugte inaktive Kollisionsnarbe zwischen ausgewählten Kratonen in nichtkratonischer kontinentaler Kruste. Sie besitzt keinen simulierten Vorgänger, vertritt eine vormodellierte tektonische Vorgeschichte und kann spätere Riftkandidaten begünstigen.
+Eine im Seed-Zustand erzeugte Sutur zwischen ausgewählten Kratonen in nichtkratonischer kontinentaler Kruste. Sie besitzt keinen simulierten Vorgänger, vertritt eine vormodellierte tektonische Vorgeschichte und kann spätere Ereigniskandidaten begünstigen.
 _Avoid_: aktive Kollision, Kratongrenze, Plattengrenze
 
 **Rift**:
-Ein aktives Auseinanderbrechen kontinentaler Kruste innerhalb einer expliziten Platte. Erst erfolgreiches Aufbrechen erzeugt getrennte Platten und kann in einen Rücken übergehen; nicht aufgelöste alte Ozeankruste kann selbst nicht riften.
-_Avoid_: beliebige Divergenz, Mittelozeanischer Rücken
+Das aktive Auseinanderbrechen kontinentaler Kruste innerhalb einer expliziten Platte, repräsentiert durch eine zentrale Linie. Erst vollständiger erfolgreicher Break-up erzeugt getrennte Platten und Rücken; nicht aufgelöste alte Ozeankruste kann selbst nicht riften.
+_Avoid_: beliebige Divergenz, Rücken, Riftkorridor als zweite autoritative Geometrie
 
-**Subduktionszone**:
-Ein aktives konvergentes Grenzfeature, an dem Kruste verbraucht wird. Während der Initialisierungsphase darf sie auch nicht aufgelöste alte Ozeankruste an der Grenze zu einer expliziten Platte verbrauchen.
-_Avoid_: jede konvergente Bewegung, Kollisionszone
+**Rücken**:
+Die linienförmige ozeanische Akkretionsachse einer divergenten Grenze zwischen eigenständig bewegten Platten oder ihre konjugierte erhaltene Spur. Nur ein aktiver Rücken erzeugt ozeanische Kruste; kontinentale Divergenz bleibt bis zum Break-up ein Rift.
+_Avoid_: beliebige divergente Grenze, Rift, breite Höhenzone
+
+**Subduktion**:
+Der aktive konvergente Prozess, bei dem ozeanische Kruste der Unterplatte verbraucht wird und der im Modell durch einen Graben repräsentiert ist.
+_Avoid_: eigener Feature-Typ Subduktionszone, jede konvergente Bewegung, Verbrauch kontinentaler Kruste
+
+**Graben**:
+Das orientierte linienförmige Grenzfeature aktiver Subduktion mit unveränderlicher Unter-/Oberplattenpolarität. Nur die geometrisch anliegende Unterplatte wird an ihm verbraucht.
+_Avoid_: Subduktion als zweites Feature, jede konvergente Grenze, Kollisionsfront
+
+**Vulkanbogen**:
+Eine aus genau einem reifen Graben abgeleitete, grabenparallele Linie auf dessen Oberplatte. Er ist eine Oberflächenabstraktion ohne berechnete Slabgeometrie oder Schmelzproduktion.
+_Avoid_: symmetrischer Grabenpuffer, unabhängiger Vulkanismus, Höhenprofil
+
+**Transformstörung**:
+Ein aktives linienförmiges Grenzfeature, das zwei tektonische Endfeatures bei tangential dominierter Relativbewegung verbindet und keine Fläche erzeugt oder verbraucht.
+_Avoid_: Fracture Zone, jeder schräge Grenzabschnitt, diffuse Deformationszone
+
+**Fracture Zone**:
+Eine krustengebundene konjugierte Spur, die allein durch fortgesetzte Spreizung beiderseits einer Ridge–Ridge-Transformstörung entsteht. Sie ist keine aktive Plattengrenze und bleibt bis zum Verbrauch ihrer Trägerkruste erhalten.
+_Avoid_: aktive Transformstörung, beliebige alte Störung, Ridge–Trench-Connector
+
+**Kollision**:
+Der aktive linienförmige Kontaktprozess kontinentaler Kruste nach Ozeanschließung. Er verbraucht keine kontinentale Fläche und hinterlässt als dauerhafte Spuren Sutur und Orogenzone statt eines eigenen Kollisionsrelikts.
+_Avoid_: jede Konvergenz, Subduktion, reliktische Kollisionslinie
+
+**Sutur**:
+Die reliktische linienförmige Narbe eines geschlossenen Ozeans, abgeleitet aus dem beendeten Graben und dem bestätigten Kontinentkontakt. Sie ist kein aktiver Grenztyp und besitzt keinen altersbedingten Ablauf.
+_Avoid_: aktive Kollision, beliebige Kontinentalgrenze, Kratongrenze
+
+**Orogenzone**:
+Das sphärische Polygon der durch eine Kollision deformierten Zone, dessen Breite im MVP ein kinematischer Proxy und keine Höhen- oder Erosionsaussage ist.
+_Avoid_: Gebirgshöhe, Terrain, exklusive Krustenfläche
 
 **Gültiger Oberflächenzustand**:
 Ein fachlicher Zeitpunkt, an dem Oberflächenbelegung, Zusammenhänge, Trag- und Feature-Beziehungen sowie Abstammungen sämtliche Invarianten erfüllen. Tektonische Ereignisse wechseln atomar zwischen gültigen Zuständen; halbfertige Rechenschritte gehören nicht zum fachlichen Zustand.

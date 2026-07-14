@@ -104,8 +104,10 @@ Zustandswechsel und reine Geometrieänderungen erhalten die Feature-Identität. 
 
 Jedes aktuelle Feature ist entweder
 
-- **grenzgebunden** auf einer aktuellen Plattengebietsgrenze oder
+- **grenzgebunden** an eine aktuelle Plattengebietsgrenze oder
 - **krustengebunden** auf beziehungsweise innerhalb aktuell tragender Krustenregionen.
+
+Die Geometrie eines grenzgebundenen Linienfeatures liegt auf der bezeichneten Grenze. Ein grenzgebundenes Flächenfeature besitzt stattdessen eine linienförmige Bindungsachse auf der Grenze und darf die angrenzenden Plattengebiete überlagern; seine aktuelle Flächengeometrie wird vollständig aus dieser Achse und seinen fachlichen Parametern bestimmt. Im MVP gilt dies ausschließlich für aktive und abklingende Orogenzonen. Dadurch erhält ein solches Flächenfeature keine Eigentümerplatte und keine eigene Bewegung.
 
 Ein aktuelles Feature darf nicht ohne räumliche Bindung bestehen. Vollständiger Verbrauch seiner tragenden Kruste beendet ein krustengebundenes Feature. Teilweiser Verbrauch verkleinert es; räumliche Trennung erzeugt neue Nachfolgerfeatures.
 
