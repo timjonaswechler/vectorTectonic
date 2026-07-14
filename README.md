@@ -8,7 +8,7 @@ Die fachliche und technische Spezifikation wird zunächst über eine Wayfinder-M
 
 ## Status
 
-Planungsphase.
+Planungsphase. Die Entscheidungen werden in der Wayfinder-Map [Polygonbasierte Tektonik-Simulation spezifizieren](https://github.com/timjonaswechler/vectorTectonic/issues/1) erarbeitet.
 
 ## Lizenz
 
