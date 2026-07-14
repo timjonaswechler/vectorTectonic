@@ -84,6 +84,30 @@ _Avoid_: umbenannte aufgelöste Kruste, eine unverbundene Krustenregion, dritte 
 Die als null gesetzte Bewegung des nicht aufgelösten Hintergrunds, gegen die Bewegungen expliziter Platten während der Initialisierung als konvergent, divergent oder transformant eingeordnet werden.
 _Avoid_: Eigenbewegung einer Platte, Plattenidentität
 
+**Plattenbewegungszustand**:
+Die vollständige Bewegungszuordnung eines gültigen Simulationszeitpunkts mit genau einem Winkelgeschwindigkeitsvektor für jede aktuelle explizite Platte. Der nicht aufgelöste Hintergrund und beendete Platten besitzen keinen Plattenbewegungszustand.
+_Avoid_: gespeicherter Eulerpol zusätzlich zum Vektor, Bewegung des Hintergrunds, unvollständige Plattenzuordnung
+
+**Winkelgeschwindigkeitsvektor**:
+Die kanonische gerichtete Rotationsbewegung einer expliziten Platte auf der Kugel. Eulerpol, Rotationsrate und lokale Oberflächengeschwindigkeit werden daraus abgeleitet; der Nullvektor bezeichnet Stillstand ohne Eulerpol.
+_Avoid_: translatorische Plattenbewegung, redundant gespeicherter Eulerpol, physikalischer Drehimpuls
+
+**No-Net-Rotation-Bezugssystem**:
+Das Bezugssystem der Reifephase, in dem die flächenintegrierte gemeinsame Starrrotation aller expliziten Platten null ist, ohne ihre relativen Grenzbewegungen zu verändern. Während der Initialisierung gilt stattdessen die Referenzbewegung des Hintergrunds.
+_Avoid_: fixierte Ankerplatte, ruhender Mantel, einfaches Mittel der Eulerpole
+
+**Kinematischer Einflussbeitrag**:
+Ein regelbasierter, längengewichteter Beitrag einer bereits feststehenden tektonischen Beziehung zur bevorzugten Plattenbewegung. Slab Pull, Ridge Push und Kollisionswiderstand sind im MVP solche kalibrierten Einflüsse und ausdrücklich keine berechneten physikalischen Kräfte.
+_Avoid_: Kraft, Beschleunigung, Mantelströmung, Ereignisauslöser
+
+**Bewegungsvererbung**:
+Die deterministische Überleitung der zuletzt gültigen Plattenbewegungen auf Nachfolger einer Plattenteilung oder -verschmelzung. Sie ist eine Regel des Plattenabstammungsübergangs und kein kinematischer Einflussbeitrag.
+_Avoid_: zufällige Neubewegung, Mittelung von Eulerpolen, tektonischer Antrieb
+
+**Relative Grenzkinematik**:
+Die aus den aktuellen Bewegungen beider angrenzender Plattengebiete abgeleitete lokale Normal- und Tangentialbewegung einer orientierten Grenze. Sie kann abschnittsweise öffnend, schließend, transform oder ruhend sein und ist noch keine Entscheidung über ein tektonisches Feature oder Ereignis.
+_Avoid_: absoluter Plattenvektor, Grenzfeature, Ereignisentscheidung
+
 **Simulationszeit**:
 Die monotone fachliche Zeitachse eines Laufs, beginnend bei null im Seed-Zustand. Entstehung und Ende aktueller oder beendeter Entitäten beziehen sich auf sie; der Wechsel in die Reifephase setzt sie nicht zurück.
 _Avoid_: zurückgesetzte Phasenzeit, reale geologische Datierung
