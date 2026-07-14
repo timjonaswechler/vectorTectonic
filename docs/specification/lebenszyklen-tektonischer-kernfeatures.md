@@ -10,7 +10,7 @@ Grundlagen: [fachliches Zustandsmodell](fachliches-zustandsmodell.md), [Geometri
 
 Dieses Dokument legt für die neun tektonischen Kernfeatures Entstehung, Veränderung, Ende, Erhaltung, autoritative Geometrie und fachliche Herkunft fest. Es beschreibt zulässige Lebensläufe und die Wirkungen bestätigter Übergänge, aber weder deren globale Auswahl noch die Konfliktauflösung konkurrierender Ereignisse.
 
-Ticket #9 bestimmt konkrete Trigger-Defaults, Scores, Prioritäten, Gleichstände und die atomare Auswahl miteinander konkurrierender Ereignisse. Ticket #11 bestimmt Persistenz und Abfragen, Ticket #13 numerische Akzeptanzbudgets. Dieses Dokument führt keine Implementierungsdatenstrukturen, vollständige Simulationshistorie, Raster, Höhen, Erosion, Rheologie oder Mantelprozesse ein.
+Die [automatischen tektonischen Ereignisregeln](automatische-tektonische-ereignisregeln.md) bestimmen konkrete Trigger-Defaults, Scores, Prioritäten, Gleichstände und die atomare Auswahl miteinander konkurrierender Ereignisse. Ticket #11 bestimmt Persistenz und Abfragen, Ticket #13 numerische Akzeptanzbudgets. Dieses Dokument führt keine Implementierungsdatenstrukturen, vollständige Simulationshistorie, Raster, Höhen, Erosion, Rheologie oder Mantelprozesse ein.
 
 ## 1. Verbindliche Feature-Taxonomie und Geometrie
 
@@ -61,11 +61,11 @@ Sobald die typspezifische Aktivitätsbedingung nicht mehr erfüllt ist, wechselt
 - eine Kollision erhöht weder Verkürzungsproxy noch Kollisionswiderstand,
 - ein Rift und eine Fracture Zone erhöhen ihren Reife- beziehungsweise Wachstumsfortschritt nicht.
 
-Kehrt die passende Bedingung innerhalb der Hysterese zurück, wird dieselbe Identität wieder `active`. Andernfalls endet sie gemäß ihrem typspezifischen Lebenslauf. Die konkrete Dauer nicht wissenschaftlich eingegrenzter Hysteresen wird in #9 festgelegt.
+Kehrt die passende Bedingung innerhalb der Hysterese zurück, wird dieselbe Identität wieder `active`. Andernfalls endet sie gemäß ihrem typspezifischen Lebenslauf. Die konkrete Dauer nicht wissenschaftlich eingegrenzter Hysteresen legen die automatischen Ereignisregeln fest.
 
 ### 2.4 Bindung und Erhaltung
 
-Aktive grenzgebundene Features folgen der atomar bestätigten aktuellen Grenze und besitzen keinen eigenen Bewegungsvektor. Bei Linienfeatures liegt die Geometrie auf der Grenze. Eine aktive oder abklingende Orogenzone ist als einziges grenzgebundenes Flächenfeature über eine aus ihrer Quellkollision abgeleitete Bindungsachse verankert; ihr Polygon wird bei jedem gültigen Übergang vollständig aus Achse, eingefrorenem oder wachsendem Verkürzungsproxy, Breitenregel und bestätigter Vergenz bestimmt. Krustengebundene Features werden mit ihrem eindeutigen Träger starr advektiert. Wechselt ein vollständiger Träger, bleibt die Feature-Identität erhalten; verteilt sich die Geometrie anschließend auf unterschiedlich bewegte Träger, entstehen räumlich getrennte Nachfolger.
+Aktive grenzgebundene Features folgen der atomar bestätigten aktuellen Grenze und besitzen keinen eigenen Bewegungsvektor. Bei Linienfeatures liegt die Geometrie auf der Grenze. Eine aktive oder abklingende Orogenzone ist als einziges grenzgebundenes Flächenfeature über eine aus ihrer Quellkollision abgeleitete Bindungsachse verankert; ihr Polygon wird bei jedem gültigen Übergang vollständig aus Achse, eingefrorenem oder wachsendem Verkürzungsproxy, Breitenregel und bestätigter Vergenz bestimmt. Krustengebundene Features werden mit ihrem eindeutigen Träger starr advektiert. Ausschließlich die in den Ereignisregeln festgelegten flächenneutralen Qualifikations- und Kollisionsakkommodationen dürfen lokale Geometrie unter Erhaltung von Krustenfläche, Kratonen und Zwangskonturen deformieren. Wechselt ein vollständiger Träger, bleibt die Feature-Identität erhalten; verteilt sich die Geometrie anschließend auf unterschiedlich bewegte Träger, entstehen räumlich getrennte Nachfolger.
 
 Alle geometrisch noch vorhandenen Relikte gehören unabhängig von ihrem Alter zur autoritativen Feature-Map. Eine Sichtbarkeitsfrist, Stiländerung oder Generalisierung darf ihre fachliche Geometrie nicht löschen. Vollständiger Verbrauch der tragenden Kruste beendet ein Relikt; teilweiser Verbrauch verkleinert es, und eine für eindeutige Trägerbewegung erforderliche räumliche Trennung erzeugt Nachfolger. Spätere Features dürfen Relikte überlagern, ohne sie zu verdrängen.
 
@@ -91,11 +91,11 @@ Länge, Fläche, tatsächliche Breite, aktuelle Normal-/Tangentialrate, Obliquit
 
 Ein `rift` entsteht erst mit bestätigtem Beginn des Auseinanderbrechens in zusammenhängender nichtkratonischer kontinentaler Kruste einer expliziten Platte. Die Auswahl kann eine Reliktsutur oder ein früheres Rift als geerbte Schwäche verwenden, doch der bloße Kandidat bleibt außerhalb des Feature-Zustands. Die autoritative Riftlinie und ihr abgeleiteter Korridor dürfen keine Kraton-Zwangskontur schneiden. Ein nicht gültig um Kratone führbarer Verlauf wird nicht erzeugt.
 
-Das Rift beginnt als `active` mit Unterzustand `incipient`, eigener Entstehungszeit, betroffenen Krustenbeziehungen, auslösender Schwäche und einem Reifegrad von null. Der abgeleitete Riftkorridor verwendet eine bei Entstehung gewählte Breite von 30–300 km; 100 km bleibt Forschungsreferenz, der konkrete Default folgt #9.
+Das Rift beginnt als `active` mit Unterzustand `incipient`, eigener Entstehungszeit, betroffenen Krustenbeziehungen, auslösender Schwäche und einem Reifegrad von null. Der abgeleitete Riftkorridor verwendet eine bei Entstehung gewählte Breite von 30–300 km; 100 km ist der in den automatischen Ereignisregeln bestätigte Default.
 
 ### 4.2 Veränderung
 
-Weil die noch ungeteilte Platte starr ist, wird keine fiktive innerplattige Relativbewegung integriert. Stattdessen wächst ein dimensionsloser, ausdrücklich als Modellannahme markierter Reifegrad mit kumulierter `active`-Riftzeit. Die gesamte Reifedauer bis zum Break-up-Kandidaten liegt im Bereich 20–60 Myr. Eine in #9 festgelegte Zwischenschwelle wechselt den Unterzustand von `incipient` nach `localized`.
+Weil die noch ungeteilte Platte starr ist, wird keine fiktive innerplattige Relativbewegung integriert. Stattdessen wächst ein dimensionsloser, ausdrücklich als Modellannahme markierter Reifegrad mit kumulierter `active`-Riftzeit. Die gesamte Reifedauer bis zum Break-up-Kandidaten liegt im Bereich 20–60 Myr. Die in den automatischen Ereignisregeln festgelegte Zwischenschwelle wechselt den Unterzustand von `incipient` nach `localized`.
 
 Zusammenhängende Endfortpflanzung und Formänderung der Riftlinie erhalten die Identität, solange dieselbe Schwäche und derselbe beabsichtigte Trennverlauf fortbestehen. Technische Kurvenänderungen dürfen weder Kratone schneiden noch einen fachlich anderen Trennpfad unter derselben Identität verbergen.
 
@@ -107,8 +107,10 @@ Ein Break-up ist nur als vollständiger atomarer Übergang zulässig. Er muss gl
 
 1. die gesamte bestätigte Riftachse als neue Plattengrenze einsetzen,
 2. die Vorgängerplatte gültig teilen,
-3. erstmals entlang der Achse ozeanische Kruste erzeugen und
-4. einen oder mehrere aktive Rücken-Nachfolger erzeugen.
+3. einen oder mehrere aktive Rücken-Nachfolger erzeugen und
+4. die bestätigte Öffnungszielkurve an die Bewegungsvererbung übergeben.
+
+Am exakten Break-up-Zeitpunkt entsteht noch keine ozeanische Fläche positiver Größe. Die erste ozeanische Kruste entsteht im folgenden Tick ausschließlich aus dem tatsächlich integrierten positiven Rückenfluss.
 
 Ein abschnittsweiser Rift-/Rücken-Hybrid ist im MVP unzulässig. Scheitert die atomare Topologieänderung, bleibt der vorherige gültige Riftzustand bestehen. Läuft die Hysterese ohne Break-up oder Erholung ab, wechselt dasselbe Rift mit Unterzustand `abandoned` nach `relict`; Linie, Korridorparameter, Reifegrad und Herkunft bleiben erhalten.
 
@@ -120,7 +122,7 @@ Ein `spreading_ridge` entsteht genau in einem atomaren Übergang, der eine diver
 
 - erfolgreicher kontinentaler Break-up mit Rift-Vorgänger,
 - bestätigter Achsensprung mit Rücken-Vorgänger oder
-- bestätigte ozeanische Grenzreorganisation beziehungsweise Plattenteilung.
+- bestätigte ozeanische Plattenteilung oder Grenzreklassifikation.
 
 Auf kontinentaler Kruste ist ein Rift zwingende Vorstufe. Eine bloß divergent klassifizierte Grenze ohne ozeanische Akkretion ist kein Rücken.
 
@@ -140,9 +142,9 @@ Nach abgelaufener Hysterese endet die aktive grenzgebundene Rückenidentität. E
 
 ### 6.1 Entstehung
 
-Ein `trench` entsteht erst durch bestätigte Subduktionsinitiierung an einem länger konvergenten Grenzsegment mit mindestens einer ozeanischen Seite und einer zulässigen geerbten Schwäche. Weder Krustenalter noch Konvergenz noch eine Fracture Zone lösen ihn allein aus. Die konkrete Kombination und Auswahl entscheidet #9.
+Ein `trench` entsteht erst durch bestätigte Subduktionsinitiierung an einem länger konvergenten Grenzsegment mit mindestens einer ozeanischen Seite und einer zulässigen geerbten Schwäche. Weder Krustenalter noch Konvergenz noch eine Fracture Zone lösen ihn allein aus. Die konkrete Kombination und Auswahl entscheiden die automatischen Ereignisregeln.
 
-Bei Entstehung werden Linienorientierung, Unterplatte, Oberplatte und Polarität atomar festgelegt. Bei Ozean–Kontinent-Konvergenz ist im MVP standardmäßig der Ozean Unterplatte; Ozean–Ozean-Polarität folgt der in #9 festgelegten deterministischen Auswahl. Die Polarität bleibt während der gesamten Grabenidentität unveränderlich. Ein bestätigter Polaritätswechsel beendet sie und erzeugt einen neuen Graben-Nachfolger; ein spontaner Wechsel ist verboten.
+Bei Entstehung werden Linienorientierung, Unterplatte, Oberplatte und Polarität atomar festgelegt. Bei Ozean–Kontinent-Konvergenz ist im MVP standardmäßig der Ozean Unterplatte; Ozean–Ozean-Polarität folgt der in den automatischen Ereignisregeln festgelegten deterministischen Auswahl. Die Polarität bleibt während der gesamten Grabenidentität unveränderlich. Ein bestätigter Polaritätswechsel beendet sie und erzeugt einen neuen Graben-Nachfolger; ein spontaner Wechsel ist verboten.
 
 ### 6.2 Veränderung
 
@@ -152,13 +154,13 @@ Seine Slab-Pull-Reife wächst ausschließlich mit kumulierter aktiver Grabenzeit
 
 ### 6.3 Ende ohne Kollision
 
-Endet der Graben durch dauerhaft ausbleibende Konvergenz, Rückenankunft oder Reorganisation, endet seine aktive grenzgebundene Identität. Es entsteht ein einzelner `trench[relict]`-Nachfolger auf der damaligen Oberplattenkruste. Er übernimmt letzte Geometrie, Polarität und Herkunft, besitzt aber keine aktuellen Unter-/Oberplattenrollen mehr. Bei nur abschnittsweisem Ende entstehen fortbestehende aktive und reliktische Nachfolger.
+Endet der Graben durch dauerhaft ausbleibende Konvergenz, Rückenankunft oder bestätigte Grenzreklassifikation, endet seine aktive grenzgebundene Identität. Es entsteht ein einzelner `trench[relict]`-Nachfolger auf der damaligen Oberplattenkruste. Er übernimmt letzte Geometrie, Polarität und Herkunft, besitzt aber keine aktuellen Unter-/Oberplattenrollen mehr. Bei nur abschnittsweisem Ende entstehen fortbestehende aktive und reliktische Nachfolger.
 
 ### 6.4 Kontinentankunft
 
-Erreicht kontinentale Kruste der Unterplatte den Graben auf einem in #9 bestätigten zusammenhängenden Abschnitt, wechselt dieser nach `waning` mit Unterzustand `collision_pending`. Ozeanischer Verbrauch und Slab Pull pausieren lokal sofort. Der Kontakt muss 1–3 Myr anhalten; löst er sich vorher gültig, darf der Graben zur selben aktiven Identität zurückkehren.
+Erreicht kontinentale Kruste der Unterplatte den Graben auf einem in den automatischen Ereignisregeln bestätigten zusammenhängenden Abschnitt, wechselt dieser nach `waning` mit Unterzustand `collision_pending`. Ozeanischer Verbrauch und Slab Pull pausieren lokal sofort. Der Kontakt muss 1–3 Myr anhalten; löst er sich vorher gültig, darf der Graben zur selben aktiven Identität zurückkehren.
 
-Bei bestätigter Kollision endet der betroffene Grabenabschnitt atomar zugunsten einer aktiven Kollision und einer reliktischen Sutur; gleichzeitig entsteht die aktive Orogenzone. Gewinnt stattdessen eine Grenzreorganisation, gilt der Lebenslauf des Endes ohne Kollision.
+Bei bestätigter Kollision endet der betroffene Grabenabschnitt atomar zugunsten einer aktiven Kollision und einer reliktischen Sutur; gleichzeitig entsteht die aktive Orogenzone. Erfordert der geschlossene Ereigniskatalog stattdessen eine Grenzreklassifikation, gilt der Lebenslauf des Endes ohne Kollision.
 
 ## 7. Vulkanbogen
 
@@ -176,7 +178,7 @@ Endet der Quellgraben, klingt der Bogen 0–5 Myr aus und wechselt anschließend
 
 ### 8.1 Entstehung und Identität
 
-Eine `transform_fault` entsteht durch einen bestätigten, tangential dominierten Connector zwischen genau zwei aktiven tektonischen Endfeatures. Zulässige Connector-Typen sind Ridge–Ridge, Ridge–Trench und Trench–Trench; eine kontinentale, tangential dominierte Hauptlinie ist der entsprechende kontinentale Typ. Die konkrete automatische Auswahl bleibt #9 vorbehalten.
+Eine `transform_fault` entsteht durch einen bestätigten, tangential dominierten Connector zwischen genau zwei aktiven tektonischen Endfeatures. Zulässige Connector-Typen sind Ridge–Ridge, Ridge–Trench und Trench–Trench; eine kontinentale, tangential dominierte Hauptlinie ist der entsprechende kontinentale Typ. Die konkrete automatische Auswahl ist in den automatischen Ereignisregeln festgelegt.
 
 Die Identität ist an das fachliche Paar aktiver Endpunkte und den Connector-Typ gebunden. Diese Endpunkte werden durch Beziehungen zu Feature-Identitäten und deren geometrischen Enden beschrieben, niemals durch dauerhafte technische Vertexhandles. Formänderung, Längenänderung und wechselnde Obliquität erhalten die Identität. Der Ersatz eines Endfeatures oder Connector-Typs beendet sie zugunsten eines neuen Nachfolgers.
 
@@ -295,18 +297,15 @@ Ein atomarer Übergang scheitert strukturiert, wenn er eine erforderliche Bindun
 
 Die Lebenszyklusregeln konzentrieren genügend Verhalten, um `FeatureLifecycle` als **Deepening Candidate** für ein künftiges Modul zu benennen. Seine mögliche caller-facing Verantwortung wäre, aus gültigem Snapshot, passendem `KinematicStep`, bestätigten Ereignissen, Zeit und versionierter Konfiguration einen vollständigen deklarativen Lebenszyklus-Übergangsplan oder einen strukturierten Fehler zu liefern. Topologieänderung, Eventauswahl und Persistenz wären Aufrufer beziehungsweise Nachbarn, nicht Teile seiner Implementierung.
 
-Der Kandidat ist ausdrücklich kein akzeptiertes tiefes Modul und seine Schnittstelle keine nachgewiesene Seam. Reale Aufrufer, Implementierung und Schnittstellentests fehlen; #9 muss zudem den Vertrag bestätigter Ereignisse festlegen. Es werden weder Adapter noch zusätzliche Ports eingeführt. Die Löschprobe begründet nur den Kandidatenstatus: Ohne eine solche Konzentration würden Zustandsautomaten, Abstammung, Reliktbindung und Provenienz voraussichtlich in Ereignisauflösung, Topologietransaktionen, Persistenz und Tests dupliziert.
+Der Kandidat ist ausdrücklich kein akzeptiertes tiefes Modul und seine Schnittstelle keine nachgewiesene Seam. Reale Aufrufer, Implementierung und Schnittstellentests fehlen; den Vertrag bestätigter Ereignisse legen die automatischen Ereignisregeln fest. Es werden weder Adapter noch zusätzliche Ports eingeführt. Die Löschprobe begründet nur den Kandidatenstatus: Ohne eine solche Konzentration würden Zustandsautomaten, Abstammung, Reliktbindung und Provenienz voraussichtlich in Ereignisauflösung, Topologietransaktionen, Persistenz und Tests dupliziert.
 
 ## 16. Bewusst vertagte Entscheidungen
 
 Diese Spezifikation entscheidet ausdrücklich nicht:
 
-- konkrete Initiierungs-Scores, Trigger-Defaults, Ereignisprioritäten und Konfliktauflösung (#9),
-- den konkreten Default für Riftreife, Bogenreife, Hysteresen, Kontaktzeit, Offsets und Breiten innerhalb der bestätigten Bereiche (#9),
-- globale Tickreihenfolge und Face-Zuordnung konkurrierender Ereignisse (#9),
 - dauerhafte Serialisierung, Sichtbarkeitsabfragen und Darstellungsfilter (#11),
 - Bevy-Stil, Interaktion oder Mesh-Erzeugung (#12),
 - absolute numerische Toleranzen, Ensembleziele und Leistungsbudgets (#13),
 - konkrete Datenstrukturen, Algorithmen oder die endgültige Modulschnittstelle.
 
-Damit sind Entstehung, Veränderung, Ende und Erhaltung der tektonischen Kernfeatures festgelegt, ohne automatische Ereignisentscheidung oder Implementierung vorwegzunehmen.
+Damit sind Entstehung, Veränderung, Ende und Erhaltung der tektonischen Kernfeatures festgelegt; die automatische Ereignisentscheidung ist in ihrer nachfolgenden Spezifikation getrennt geregelt, ohne eine Implementierung vorwegzunehmen.

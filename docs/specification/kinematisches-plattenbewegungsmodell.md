@@ -10,7 +10,7 @@ Grundlagen: [fachliches Zustandsmodell](fachliches-zustandsmodell.md), [Geometri
 
 Dieses Dokument legt fest, wie explizite Platten als starre Körper auf der Kugel bewegt, ihre Eulerrotationen aus regelbasierten Einflüssen aktualisiert und relative Grenzbewegungen bestimmt werden. Das Modell ist deterministisch, kinematisch und bewusst nicht prädiktiv. Slab Pull, Ridge Push und Kollisionswiderstand sind kalibrierte Einflüsse auf gewünschte Oberflächengeschwindigkeiten, keine berechneten physikalischen Kräfte.
 
-Nicht festgelegt werden Beginn, Ende oder Auswahl tektonischer Ereignisse (#8 und #9), fachliche Face-Zuordnungen bei konkurrierenden Bewegungen (#9), Persistenz (#11) oder die konkreten numerischen Integrations- und Akzeptanzbudgets (#13). Mantelkonvektion, Spannungsfelder, Rheologie, Massenträgheit und quantitative Kraftbilanzen bleiben außerhalb des MVPs.
+Dieses Dokument legt Beginn, Ende, Auswahl und fachliche Face-Zuordnung tektonischer Ereignisse nicht selbst fest; diese sind in den Feature-Lebenszyklen und den [automatischen tektonischen Ereignisregeln](automatische-tektonische-ereignisregeln.md) getrennt spezifiziert. Nicht festgelegt werden Persistenz (#11) oder die konkreten numerischen Integrations- und Akzeptanzbudgets (#13). Mantelkonvektion, Spannungsfelder, Rheologie, Massenträgheit und quantitative Kraftbilanzen bleiben außerhalb des MVPs.
 
 ## 1. Autoritativer Bewegungszustand
 
@@ -89,7 +89,7 @@ Der längengewichtete Beitrag hat das Grundgewicht `1,0` und wird mit Krustenalt
 
 Nicht aufgelöste alte Ozeankruste behält fachlich unbekanntes Alter, wird für diesen Einfluss aber mit einem konfigurierten Ersatzalter von 80 Ma bewertet.
 
-Nach Beginn einer Subduktionszone steigt das Reifegewicht linear von null auf eins. Die Reifezeit beträgt standardmäßig 10 Myr und darf zwischen 5 und 20 Myr liegen. Der Umgang mit kurzen Unterbrechungen folgt der in #8/#9 festzulegenden Feature-Hysterese. Alter und Slab Pull können eine Subduktion nicht selbst initiieren; sie beeinflussen nur eine bereits aktive, rollenbestimmte Zone.
+Nach Beginn einer Subduktionszone steigt das Reifegewicht linear von null auf eins. Die Reifezeit beträgt standardmäßig 10 Myr und darf zwischen 5 und 20 Myr liegen. Der Umgang mit kurzen Unterbrechungen folgt der in Feature-Lebenszyklen und Ereignisregeln festgelegten Feature-Hysterese. Alter und Slab Pull können eine Subduktion nicht selbst initiieren; sie beeinflussen nur eine bereits aktive, rollenbestimmte Zone.
 
 ### 3.3 Ridge Push
 
@@ -99,7 +99,7 @@ Spreizungsrate und Krustenalter verstärken diesen Beitrag nicht zusätzlich. Da
 
 ### 3.4 Kollisionswiderstand
 
-Eine aktive Kontinentkollision wirkt gekoppelt auf beide beteiligten Platten und setzt ausschließlich für deren vorhergesagte konvergente Normalkomponente ein abweichendes Ziel. Ihr tangentiales Ziel bleibt gegenüber der vorläufigen Bewegung unverändert. Das Kollisionsziel selbst kehrt die Normalkomponente niemals um und erzeugt keine Divergenz; die gekoppelte Ausgleichsrechnung, andere Einflüsse und globale Nebenbedingungen können die tatsächlich resultierenden Komponenten dennoch verändern. Ziel und Ist werden deshalb getrennt diagnostiziert und spätere Folgen ausschließlich durch #8/#9 entschieden.
+Eine aktive Kontinentkollision wirkt gekoppelt auf beide beteiligten Platten und setzt ausschließlich für deren vorhergesagte konvergente Normalkomponente ein abweichendes Ziel. Ihr tangentiales Ziel bleibt gegenüber der vorläufigen Bewegung unverändert. Das Kollisionsziel selbst kehrt die Normalkomponente niemals um und erzeugt keine Divergenz; die gekoppelte Ausgleichsrechnung, andere Einflüsse und globale Nebenbedingungen können die tatsächlich resultierenden Komponenten dennoch verändern. Ziel und Ist werden deshalb getrennt diagnostiziert und spätere Folgen ausschließlich durch Feature-Lebenszyklen und Ereignisregeln entschieden.
 
 Für den kumulativen `shortening_proxy` in Kilometern ist der entgegenwirkende Anteil
 
@@ -144,7 +144,7 @@ Der resultierende Vektor bleibt während des gesamten Ticks konstant. Es gibt ke
 
 Die räumliche Fortschreibung erfolgt durch die exakte endliche Rotation `exp(ω Δt)`, nicht durch lineare Aktualisierung einzelner Vertices. Eine gemeinsame Rotation erhält Kugellage, Winkel, Großkreisbögen und innere Plattengeometrie.
 
-Unterschiedlich bewegte Platten liefern konkurrierende Randvorschläge an die atomare Overlay- und Ereignisauflösung. Die Kinematik entscheidet weder neue Face-Zuordnungen noch Ereignisprioritäten. Nur ein vollständig gültiger atomarer Commit darf den nächsten `SurfaceSnapshot` erzeugen.
+Unterschiedlich bewegte Platten liefern konkurrierende Randvorschläge an die atomare Overlay- und Ereignisauflösung. Die Kinematik entscheidet weder neue Face-Zuordnungen noch Ereignisprioritäten. Die Ereignisregeln dürfen ausschließlich an qualifizierender featureloser Konvergenz und aktiver Kontinentkollision eine lokale flächenneutrale Akkommodation anwenden; die tatsächliche relative Bewegung bleibt dabei für Zeitnachweis beziehungsweise Verkürzungsproxy maßgeblich. Nur ein vollständig gültiger atomarer Commit darf den nächsten `SurfaceSnapshot` erzeugen.
 
 Konfigurierte Rift- und Spreizungsraten sind Zielraten. Grenzklassifikation, Krustenerzeugung und Krustenverbrauch verwenden ausschließlich die nach Relaxation und Nebenbedingungen tatsächlich erreichte relative Bewegung. Ziel-/Ist-Abweichungen werden diagnostiziert und nicht durch zusätzliche Geometrie erzwungen.
 
@@ -169,14 +169,14 @@ Bei einer Verschmelzung erhält der neue Nachfolger den Vektor, der die unmittel
 Dabei gelten folgende feste Regeln:
 
 - `ω_p^step` ist der im abgeschlossenen `KinematicStep` tatsächlich verwendete Vektor des Vorgängers.
-- `e` läuft über jede vom Commit bestätigte kinematische Zielrate genau einmal; `s_e` ist ihre signierte normale Zielrate. Alle Zielraten haben dasselbe Gewicht pro Winkelstrecke, sofern #9 sie im selben Commit zugelassen hat.
+- `e` läuft über jede vom Commit bestätigte kinematische Zielrate genau einmal; `s_e` ist ihre signierte normale Zielrate. Alle Zielraten haben dasselbe Gewicht pro Winkelstrecke, sofern die Ereignisregeln sie im selben Commit zugelassen haben.
 - Bei einem binären Split mit Vorgänger `p` und Nachfolgern `a`, `b` gilt zusätzlich die harte Symmetriebedingung `Ω_a − ω_p^step = −(Ω_b − ω_p^step)` vor der globalen Bezugssystemprojektion.
 - Ein unverändert fortbestehender Plattenteil wird durch seine eigene Provenienz wie jeder andere Vorgänger behandelt. Jede Fläche eines Nachfolgers muss genau einer Vorgängerprovenienz zugeordnet sein; eine vorgängerlose neue Platte außerhalb des Seed-Zustands ist ungültig.
 - Mehrere Provenienzanteile einer Verschmelzung werden ausschließlich durch ihre tatsächlichen Flächenintegrale gewichtet; Eulerpole werden nicht gemittelt.
 
 Anschließend werden die für die Phase geltenden Bezugssystem-, Stillstands- und Geschwindigkeitsbedingungen gemeinsam angewandt. Eine sequentielle, von Container- oder Traversierungsreihenfolge abhängige Vererbung ist unzulässig. Besitzt die quadratische Aufgabe unter ihren harten Bedingungen kein eindeutiges endliches Minimum oder widersprechen sich harte Bedingungen, verhindert ein strukturierter Fehler den Commit.
 
-Wann eine Teilung, Verschmelzung oder andere Reorganisation eintritt und welche Änderungen gemeinsam in einem Commit erlaubt sind, bleibt #9 vorbehalten.
+Wann eine Teilung oder Verschmelzung eintritt und welche Änderungen gemeinsam in einem Commit erlaubt sind, legen die automatischen Ereignisregeln fest; eine generische Reorganisation ist unzulässig.
 
 ## 6. Relative Grenzkinematik
 
@@ -234,7 +234,7 @@ Die Overlay-/Ereignisauflösung muss erzeugte beziehungsweise verbrauchte Fläch
 
 ## 8. Mitbewegung von Kruste und Features
 
-Krustengebundene Geometrien werden durch die exakte Rotation ihres eindeutigen aktuellen Trägers starr advektiert. Das gilt auch für intraplatteninterne Relikte wie Suturen und Fracture Zones. Ein vollständiger Trägerwechsel bindet sie im nächsten gültigen Zustand an die Bewegung des neuen Trägers; eine räumliche Teilung folgt den bereits festgelegten fachlichen Nachfolgerregeln.
+Krustengebundene Geometrien werden durch die exakte Rotation ihres eindeutigen aktuellen Trägers starr advektiert. Das gilt auch für intraplatteninterne Relikte wie Suturen und Fracture Zones. Einzige Ausnahme sind die in den Ereignisregeln festgelegten lokalen flächenneutralen Akkommodationen, die Krustenfläche, Kratone und Zwangskonturen erhalten müssen. Ein vollständiger Trägerwechsel bindet sie im nächsten gültigen Zustand an die Bewegung des neuen Trägers; eine räumliche Teilung folgt den bereits festgelegten fachlichen Nachfolgerregeln.
 
 Grenzgebundene Features besitzen keinen eigenen Bewegungsvektor und keine Eigentümerplatte. Die angrenzenden Platten liefern Randvorschläge; die neue gemeinsame Feature-Geometrie und ihre Bindung werden erst atomar mit der Topologie- und Ereignisauflösung festgelegt.
 
@@ -266,11 +266,11 @@ Eingaben:
 
 - vorheriger Bewegungszustand,
 - der vollständig berechnete `KinematicStep` mit den während des Ticks tatsächlich verwendeten Vektoren,
-- vollständig gültiger atomar committeter Nachfolge-Snapshot,
+- vollständig gültiger atomar committierter oder für eine Ereignisprobe committierbarer Nachfolge-Snapshot,
 - bestätigte Plattenabstammungen und
 - durch den Commit festgelegte kinematische Zielraten.
 
-Ergebnis ist genau ein vollständiger Bewegungszustand für den neuen Snapshot oder ein strukturierter Fehler. Der im `KinematicStep` tatsächlich verwendete Vektor bildet das Vererbungsziel jeder fortbestehenden Platte; Abstammungsregeln und die gemeinsame Projektion transformieren diesen Tickendzustand nachvollziehbar für den neuen Gesamtzustand.
+Ergebnis ist genau ein vollständiger Bewegungszustand für den neuen Snapshot oder ein strukturierter Fehler. Wegen der reinen Schnittstelle darf die Ereignisauflösung dieselbe Rechnung gegen einen vollständig validierten Probe-Nachfolger verwenden, um Öffnungsziele vor Auswahl zu prüfen und zu bewerten. Ein solches Probe-Ergebnis wird nicht veröffentlicht und darf für verschiedene Kandidaten beliebig oft rein ausgewertet werden; nach dem tatsächlichen Commit wird die Rechnung genau einmal als kanonische Reconciliation für den veröffentlichten Nachfolger ausgeführt. Der im `KinematicStep` tatsächlich verwendete Vektor bildet das Vererbungsziel jeder fortbestehenden Platte; Abstammungsregeln und die gemeinsame Projektion transformieren diesen Tickendzustand nachvollziehbar für den neuen Gesamtzustand.
 
 Beide Operationen sind rein bezüglich ihrer Eingaben: Sie verändern weder Snapshot noch Bewegungszustand. Halbfertige Ergebnisse verlassen die Schnittstelle nicht. Aufrufer und Tests verwenden dieselbe Schnittstelle.
 
@@ -347,10 +347,8 @@ Kandidaten und Gleichstände werden mit stabilen fachlichen Identitäten kanonis
 Diese Spezifikation entscheidet ausdrücklich nicht:
 
 - wann Rifte, Rücken, Gräben, Kollisionen oder andere Features beginnen, enden oder ihren Zustand wechseln (#8),
-- wie Ereigniskandidaten priorisiert und konkurrierende Face-Ansprüche aufgelöst werden (#9),
-- ob ein bestimmtes kinematisches Muster ein Ereignis erzwingt oder nur begünstigt (#9),
 - wie Bewegungszustände, Diagnosen oder Zwischenstände dauerhaft gespeichert werden (#11),
 - welche absoluten Integrationsfehler, Tensor-Konditionen, Laufzeiten oder Ensembleverteilungen akzeptiert werden (#13) und
 - welche konkrete interne Datenstruktur oder numerische Solverimplementierung `PlateKinematics` verwendet.
 
-Damit ist das kinematische Plattenbewegungsmodell festgelegt, ohne Ereignisdynamik, Persistenz oder Implementierung vorwegzunehmen.
+Damit ist das kinematische Plattenbewegungsmodell festgelegt; die darauf aufbauende Ereignisdynamik ist in den [automatischen tektonischen Ereignisregeln](automatische-tektonische-ereignisregeln.md) getrennt spezifiziert, ohne Persistenz oder Implementierung vorwegzunehmen.

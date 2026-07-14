@@ -63,7 +63,7 @@ Es bestehen genau zwei materielle Krustenarten:
 
 ### 4.1 Kontinentale Kruste
 
-Ein **Kraton** ist eine spezialisierte kontinentale Krustenregion. Er behält während des gesamten Laufs Identität, Fläche und Krustenart. Er darf weder geteilt noch verbraucht oder umgewandelt werden und kann nur als Ganzes die tragende Platte wechseln. Seine Ankunft an einer Subduktionszone erzwingt Kollision oder Grenzreorganisation.
+Ein **Kraton** ist eine spezialisierte kontinentale Krustenregion. Er behält während des gesamten Laufs Identität, Fläche und Krustenart. Er darf weder geteilt noch verbraucht oder umgewandelt werden und kann nur als Ganzes die tragende Platte wechseln. Seine Ankunft an einer Subduktionszone erzwingt Kollision oder einen im geschlossenen Ereigniskatalog zulässigen Grenztypwechsel.
 
 Nichtkratonische kontinentale Kruste darf durch Rifting geteilt und vollständig zwischen Platten übertragen werden. Für das MVP gilt ausdrücklich die Modellannahme, dass die gesamte anfängliche kontinentale Krustenfläche materiell erhalten bleibt: Kontinentale Kruste wird weder neu erzeugt noch subduziert oder in ozeanische Kruste umgewandelt. Diese Vereinfachung ist kein allgemeines geologisches Naturgesetz.
 
@@ -75,7 +75,7 @@ Ein **Superkontinent** ist ein Kontinent, der alle anfänglich gesetzten Kratone
 
 Aufgelöste ozeanische Kruste besitzt bekannte Herkunft an einem bestimmten Rücken und eine bekannte Entstehungszeit oder ein bekanntes Entstehungsintervall. Ihr Alter wird daraus abgeleitet.
 
-Nicht aufgelöste alte Ozeankruste wird während der Initialisierung physisch verbraucht und durch Kruste bekannter Herkunft ersetzt. Bloße Zuordnung zu einer expliziten Platte löst sie nicht auf. Getrennte Restflächen sind eigenständige Krustenregionen mit demselben unbekannten Status.
+Nicht aufgelöste alte Ozeankruste wird während der Initialisierung physisch verbraucht und durch Kruste bekannter Herkunft ersetzt. Bis dahin bildet sie den in den Ereignisregeln flächenbilanzierten Residualträger: Führende und nachlaufende Flächen dürfen sich bei Bewegung expliziter Platten netto flächenneutral austauschen, ohne Plattenidentität, Eigenbewegung oder bekannte Herkunft zu erhalten. Bloße Zuordnung zu einer expliziten Platte löst sie nicht auf. Getrennte Restflächen sind eigenständige Krustenregionen mit demselben unbekannten Status.
 
 Ozeanische Krustenregionen können erzeugt, geteilt, verkleinert, vollständig zwischen Platten übertragen oder verbraucht werden. Verschiedene Herkunftskörper verschmelzen auch bei späterem Kontakt nicht zu einer Region.
 
@@ -117,7 +117,7 @@ Für den Kern gelten zusätzlich bereits folgende Beziehungen:
 
 - Ein Rift liegt innerhalb kontinentaler Kruste einer expliziten Platte und wird erst nach erfolgreichem Aufbrechen zum Vorgänger eines Rückens.
 - Eine Subduktionszone kann während der Initialisierung nicht aufgelöste alte Ozeankruste an der Grenze zu einer expliziten Platte verbrauchen.
-- Kontinentankunft beendet lokalen ozeanischen Verbrauch zugunsten von Kollision oder Grenzreorganisation.
+- Kontinentankunft beendet lokalen ozeanischen Verbrauch zugunsten von Kollision oder einem im geschlossenen Ereigniskatalog zulässigen Grenztypwechsel.
 
 Die vollständigen Zustände, Übergänge und Lebenszyklen der einzelnen Featuretypen werden in Ticket #8 festgelegt.
 
@@ -159,11 +159,10 @@ Eine finale Feature-Map entsteht nur, wenn der Lauf die Initialisierung vollstä
 
 ## 9. Bewusst vertagte Entscheidungen
 
-Dieses Zustandsmodell legt ausdrücklich nicht fest:
+Dieses Zustandsmodell legt ausdrücklich nicht selbst fest; nachfolgende Spezifikationen konkretisieren:
 
 - sphärische Repräsentation, Randsemantik, Snap-Toleranzen oder Polygonoperationen (#6),
 - Eulerpole, Geschwindigkeiten und deren Aktualisierung (#7),
 - vollständige Zustände und Lebenszyklen der Kernfeatures (#8),
-- Ereignisbedingungen, Priorisierung und deterministische Auswahl (#9),
 - Persistenz und Abfragen der finalen Feature-Map (#11) oder
 - konkrete Validierungs- und Akzeptanzgrenzen (#13).

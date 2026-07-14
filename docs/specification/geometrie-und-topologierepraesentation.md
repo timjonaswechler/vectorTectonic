@@ -10,7 +10,7 @@ Grundlagen: [fachliches Zustandsmodell](fachliches-zustandsmodell.md) und [Reche
 
 Dieses Dokument legt die autoritative geometrische und topologische Repräsentation der Kugeloberfläche, ihre Invarianten, Rand- und Snapsemantik sowie die Schnittstelle für atomare Änderungen fest. Es konkretisiert, wie die vollständige Krusten- und Plattengebietsbelegung strukturell ohne unbeabsichtigte Lücken oder Überlappungen erhalten bleibt.
 
-Nicht festgelegt werden Plattenbewegungsformeln (#7), Feature-Lebenszyklen (#8), Ereignisprioritäten und fachliche Konfliktregeln (#9), die dauerhafte Persistenzform (#11) oder konkrete Standardwerte und Qualitätsbudgets des Validierungsstandards (#13).
+Dieses Dokument legt Plattenbewegungsformeln, Feature-Lebenszyklen, Ereignisprioritäten und fachliche Konfliktregeln nicht selbst fest; diese sind in ihren jeweiligen nachfolgenden Spezifikationen geregelt. Nicht festgelegt werden die dauerhafte Persistenzform (#11) oder konkrete Standardwerte und Qualitätsbudgets des Validierungsstandards (#13).
 
 ## 1. Kugel- und Kurvenmodell
 
@@ -166,7 +166,7 @@ Halbfertige Zwischenschritte sind keine gültigen Snapshots und dürfen die Schn
 
 Die Geometrie-Engine darf Eigentum neuer Faces niemals anhand von Nähe, Flächengröße, Eingabereihenfolge oder internem Winding erraten. Jede neue Face muss durch die deklarative Regel genau ein Plattengebiet und genau eine Krustenregion erhalten.
 
-Unzugeordnete Faces, widersprüchliche Ansprüche oder ein teilweiser Trägerwechsel ohne den erforderlichen Krustenregions-Split brechen die Transaktion ab. Welche fachliche Regel bei Bewegung, Wachstum oder Verbrauch gewinnt, bleibt #9 vorbehalten.
+Unzugeordnete Faces, widersprüchliche Ansprüche oder ein teilweiser Trägerwechsel ohne den erforderlichen Krustenregions-Split brechen die Transaktion ab. Welche fachliche Regel bei Bewegung, Wachstum oder Verbrauch gewinnt, legen die [automatischen tektonischen Ereignisregeln](automatische-tektonische-ereignisregeln.md) fest.
 
 ### 7.2 Technische Provenienz
 
@@ -242,9 +242,8 @@ Diese Spezifikation entscheidet ausdrücklich nicht:
 
 - welche Eulerpole, Geschwindigkeiten oder Kurventessellierungsbudgets eine Bewegung erzeugt (#7),
 - wann ein Feature beginnt, endet, seinen Typ wechselt oder geteilt wird (#8),
-- welche fachliche Face-Zuordnungsregel bei konkurrierenden Ereignissen gewählt wird (#9),
 - ob Snapshots vollständig oder differenziell persistiert und wie sie abgefragt werden (#11),
 - welcher konkrete Standardwert für `W_min`, welche Weltgröße oder welche absoluten Laufzeit- und Speicherbudgets gelten (#13),
 - ob `s2rst` oder S2 C++ das Produktions-Gate gewinnt; diese Wahl bleibt dem bereits spezifizierten Bake-off vorbehalten.
 
-Damit sind die Repräsentation und ihr Interface festgelegt, ohne Entscheidungen der nachfolgenden Wayfinder-Tickets vorwegzunehmen.
+Damit sind die Repräsentation und ihr Interface festgelegt. Die fachlichen Face-Zuordnungsregeln der darauf aufbauenden Ereignisauflösung sind in den [automatischen tektonischen Ereignisregeln](automatische-tektonische-ereignisregeln.md) getrennt spezifiziert.

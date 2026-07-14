@@ -49,7 +49,7 @@ Die materielle Einordnung einer Krustenregion als kontinental oder ozeanisch. �
 _Avoid_: nicht aufgelöst, Plattenzugehörigkeit
 
 **Kraton**:
-Eine spezialisierte kontinentale Krustenregion und dauerhaft unteilbarer, nicht verbrauchbarer Kern alter Kruste, der Identität, Fläche und Krustenart über den gesamten Lauf bewahrt. Er liegt nicht innerhalb einer anderen Krustenregion, darf nur als Ganzes die tragende Platte wechseln und erzwingt bei Ankunft an einer Subduktionszone Kollision oder Grenzreorganisation.
+Eine spezialisierte kontinentale Krustenregion und dauerhaft unteilbarer, nicht verbrauchbarer Kern alter Kruste, der Identität, Fläche und Krustenart über den gesamten Lauf bewahrt. Er liegt nicht innerhalb einer anderen Krustenregion, darf nur als Ganzes die tragende Platte wechseln und erzwingt bei Ankunft an einer Subduktionszone Kollision oder einen zulässigen Grenztypwechsel.
 _Avoid_: eingebettete Zusatzfläche, gesamte Kontinentalkruste, beliebige Kontinentalfläche
 
 **Nichtkratonische kontinentale Kruste**:
@@ -77,7 +77,7 @@ Ozeanische Kruste mit bekannter Entstehung an einem bestimmten Rücken und bekan
 _Avoid_: nicht aufgelöste alte Ozeankruste, eigenständige Krustenart
 
 **Nicht aufgelöste alte Ozeankruste**:
-Anfänglich vorhandene ozeanische Kruste unbekannter Herkunft, unbekannten Alters und unbekannter historischer Plattenzugehörigkeit, die während der Initialisierung physisch verbraucht und ersetzt wird. Bloße Zuordnung zu einer expliziten Platte löst sie nicht auf; getrennte Restflächen sind eigenständige Krustenregionen und dienen gemeinsam als unbewegte Referenz.
+Anfänglich vorhandene ozeanische Kruste unbekannter Herkunft, unbekannten Alters und unbekannter historischer Plattenzugehörigkeit, die während der Initialisierung als flächenbilanzierter Residualträger dient, physisch verbraucht und ersetzt wird. Bloße Zuordnung zu einer expliziten Platte löst sie nicht auf; getrennte Restflächen sind eigenständige Krustenregionen und dienen gemeinsam als unbewegte Referenz.
 _Avoid_: umbenannte aufgelöste Kruste, eine unverbundene Krustenregion, dritte Krustenart, Ozeanplatte, leerer Raum
 
 **Referenzbewegung**:
@@ -160,9 +160,33 @@ _Avoid_: strenger Baum, Plattenabstammung, unverbindliche räumliche Nähe
 Der minimale bleibende Nachweis einer beendeten Platte, Krustenregion oder eines beendeten Features mit Identität, Art, Beginn, Ende sowie Vorgängern und Nachfolgern. Er gehört nicht zur aktuellen Oberflächenbelegung und bewahrt keine frühere Geometrie.
 _Avoid_: vollständige Simulationshistorie, aktuelles Oberflächenobjekt
 
+**Tektonisches Ereignis**:
+Ein fachlich atomarer Gesamtübergang zwischen zwei gültigen Oberflächenzuständen, der sämtliche für seine Gültigkeit erforderlichen Topologie-, Identitäts- und Featurefolgen unteilbar umfasst. Es ist entweder ein zwingendes Folgeereignis oder ein auswählbares Initiierungsereignis und gehört genau einem Typ des geschlossenen Ereigniskatalogs an.
+_Avoid_: einzeln auswählbare Teiloperation, halbfertiger Rechenschritt, bloßer Feature-Zustandswechsel, Ereigniskandidat, generische Plattenreorganisation
+
+**Ereigniskatalog**:
+Die vollständige, versionierte Menge zulässiger Typen tektonischer Ereignisse. Ein Übergang ohne passenden Katalogtyp ist unzulässig und darf nicht als generische Reorganisation ausgeführt werden.
+_Avoid_: offene Ereigniserweiterung, sonstiges Ereignis, Reorganisations-Fallback
+
+**Ereignisbündel**:
+Die atomar gemeinsam anzuwendende Menge kompatibler tektonischer Ereignisse einschließlich aller von ihnen erzwungenen Abschlussereignisse. Nur das vollständig geschlossene Bündel darf einen neuen gültigen Zustand erzeugen.
+_Avoid_: sequenziell sichtbare Teilereignisse, halbfertiger Zwischenzustand
+
+**Kandidatengedächtnis**:
+Das nicht zur Feature-Map gehörende Laufwissen über die ununterbrochene Dauer zeitabhängiger Vorbedingungen stabil fortgeführter Ereigniskandidaten. Es verleiht Kandidaten keine fachliche Identität und erzeugt bei ihrem Ende kein Relikt.
+_Avoid_: tektonisches Feature, vollständige Ereignishistorie, fachliche Kandidatenidentität
+
+**Zwingendes Folgeereignis**:
+Ein tektonisches Ereignis, das bei erfüllten Vorbedingungen zur Erhaltung fachlicher Invarianten oder als unausweichliche Folge eines bereits bestätigten Prozesses eintreten muss und nicht gegen Initiierungen bewertet wird.
+_Avoid_: optionaler Kandidat, scorebasierter Neuanfang
+
+**Auswählbares Initiierungsereignis**:
+Ein geologisch zulässiger, aber nicht erzwungener Beginn oder eine nicht zwingende Ausbreitung eines tektonischen Prozesses, der als Ereigniskandidat bewertet und konfliktfrei ausgewählt werden muss.
+_Avoid_: zwingende Zustandsfolge, Invariantenreparatur
+
 **Ereigniskandidat**:
-Eine noch nicht eingetretene Möglichkeit für ein tektonisches Ereignis. Er gehört zur Ereignisentscheidung und wird erst mit tatsächlichem Prozessbeginn zu einem tektonischen Feature.
-_Avoid_: tektonisches Feature, Relikt
+Eine noch nicht eingetretene Möglichkeit für ein auswählbares Initiierungsereignis. Er gehört zur Ereignisentscheidung und wird erst mit tatsächlichem Prozessbeginn zu einem tektonischen Feature.
+_Avoid_: zwingendes Folgeereignis, tektonisches Feature, Relikt
 
 **Reliktsutur**:
 Eine im Seed-Zustand erzeugte Sutur zwischen ausgewählten Kratonen in nichtkratonischer kontinentaler Kruste. Sie besitzt keinen simulierten Vorgänger, vertritt eine vormodellierte tektonische Vorgeschichte und kann spätere Ereigniskandidaten begünstigen.
